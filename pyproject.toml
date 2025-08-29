@@ -6,7 +6,8 @@ build-backend = "hatchling.build"
 name = "kg_sociome"
 description = "Sociome Knowledge Graph"
 authors = [
-  {name = "Harry Caufield", email = "jhc@lbl.gov"},
+  {name = "Harry Caufield", email = "jhc@lbl.gov",},
+  {name = "Lauren Chan", email = "lauren.chan@bsd.uchicago.edu",}
 ]
 license = "BSD-3-Clause"
 license-files = ["LICENSE"]
