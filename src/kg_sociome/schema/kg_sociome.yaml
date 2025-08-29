@@ -23,6 +23,51 @@ imports:
   - linkml:types
 
 classes:
+
+  NamedEntity:
+    abstract: true
+    attributes:
+      id:
+        description: >-
+          A unique identifier for the named entity
+        identifier: true
+      label:
+        aliases:
+          - name
+        description: >-
+          The label (name) of the named thing
+        range: string
+        slot_uri: rdfs:label
+
+  Triple:
+    abstract: true
+    description: Abstract parent for relations
+    attributes:
+      subject:
+        range: NamedEntity
+      predicate:
+        range: RelationshipType
+      object:
+        range: NamedEntity
+      qualifier:
+        range: string
+        description: >-
+          A qualifier for the statements, e.g. "NOT" for negation
+      subject_qualifier:
+        range: NamedEntity
+        description: >-
+          An optional qualifier or modifier for the subject of the statement, e.g. "high dose" or "intravenously administered"
+      object_qualifier:
+        range: NamedEntity
+        description: >-
+          An optional qualifier or modifier for the object of the statement, e.g. "severe" or "with additional complications"
+
+  RelationshipType:
+    is_a: NamedEntity
+    id_prefixes:
+      - RO
+      - biolink
+
   PersonHasPotentialForExposureToExposureEventRelationship:
     is_a: Triple
     description: >-
