@@ -9,88 +9,631 @@ see_also:
   - https://caufieldjh.github.io/kg-sociome
 
 prefixes:
-  kg_sociome: https://w3id.org/caufieldjh/kg-sociome/
   linkml: https://w3id.org/linkml/
-  biolink: https://w3id.org/biolink/
-  schema: http://schema.org/
-  PATO: http://purl.obolibrary.org/obo/PATO_
-  example: https://example.org/
-default_prefix: kg_sociome
-default_range: string
+  ontogpt: http://w3id.org/ontogpt/
+  rdf: https://www.w3.org/1999/02/22-rdf-syntax-ns
+  ECTO: http://purl.obolibrary.org/obo/ecto.owl
+  CHEBI: http://purl.obolibrary.org/obo/chebi.owl
+  ENVO: http://purl.obolibrary.org/obo/envo.owl
+  SNOMED: file:///mnt/nfs/local_ontologies/snomed-inferred.owl
+  MONDO: https://purl.obolibrary.org/obo/mondo/mondo-international.owl
+  HP: http://purl.obolibrary.org/obo/hp/hp-international.owl
 
 imports:
   - linkml:types
 
 classes:
-
-  NamedThing:
+  PersonHasPotentialForExposureToExposureEventRelationship:
+    is_a: Triple
     description: >-
-      A generic grouping for any identifiable entity
-    slots:
-      - id
-      - name
-      - description
-    class_uri: schema:Thing
+      A triple where the subject is a Person and where the object is a Exposure
+      Event. may need to be materialized from other data
+    slot_usage:
+      subject:
+        range: Person
+        annotations:
+          prompt.examples: ''
+        minimum_cardinality: 0
+        maximum_cardinality: 1
+      object:
+        range: ExposureEvent
+        annotations:
+          prompt.examples: ''
+        minimum_cardinality: 0
+      predicate:
+        range: PersonHasPotentialForExposureToExposureEventPredicate
+        annotations:
+          prompt.examples: ''
+
+  PersonHasPotentialForExposureToExposureEventPredicate:
+    is_a: RelationshipType
+    attributes:
+      label:
+        description: >-
+          The predicate for the PersonHasPotentialForExposureToExposureEvent
+          relationships.
+      id:
+        pattern: 'Has Potential for Exposure To'
+    id_prefixes: []
+    annotations: {}
+
+  PersonIsCloseToLocationRelationship:
+    is_a: Triple
+    description: A triple where the subject is a Person and where the object is a Location.
+    slot_usage:
+      subject:
+        range: Person
+        annotations:
+          prompt.examples: ''
+        minimum_cardinality: 0
+        maximum_cardinality: 1
+      object:
+        range: Location
+        annotations:
+          prompt.examples: ''
+        minimum_cardinality: 0
+        maximum_cardinality: 1
+      predicate:
+        range: PersonIsCloseToLocationPredicate
+        annotations:
+          prompt.examples: ''
+      distance:
+        description: ''
+        required: false
+        identifier: false
+        range: float
+
+  PersonIsCloseToLocationPredicate:
+    is_a: RelationshipType
+    attributes:
+      label:
+        description: The predicate for the PersonIsCloseToLocation relationships.
+      id:
+        pattern: 'Is Close To'
+    id_prefixes: []
+    annotations: {}
+
+  ExposureEventHasExposureStimulusStimulusRelationship:
+    is_a: Triple
+    description: >-
+      A triple where the subject is a Exposure Event and where the object is a
+      Stimulus.
+    slot_usage:
+      subject:
+        range: ExposureEvent
+        annotations:
+          prompt.examples: ''
+        minimum_cardinality: 0
+        maximum_cardinality: 1
+      object:
+        range: Stimulus
+        annotations:
+          prompt.examples: ''
+        minimum_cardinality: 0
+      predicate:
+        range: ExposureEventHasExposureStimulusStimulusPredicate
+        annotations:
+          prompt.examples: ''
+
+  ExposureEventHasExposureStimulusStimulusPredicate:
+    is_a: RelationshipType
+    attributes:
+      label:
+        description: >-
+          The predicate for the ExposureEventHasExposureStimulusStimulus
+          relationships.
+      id:
+        pattern: 'Has Exposure Stimulus'
+    id_prefixes: []
+    annotations: {}
+
+  ExposureEventHasExposureMediumMediumRelationship:
+    is_a: Triple
+    description: >-
+      A triple where the subject is a Exposure Event and where the object is a
+      Medium.
+    slot_usage:
+      subject:
+        range: ExposureEvent
+        annotations:
+          prompt.examples: ''
+        minimum_cardinality: 0
+        maximum_cardinality: 1
+      object:
+        range: Medium
+        annotations:
+          prompt.examples: ''
+        minimum_cardinality: 0
+      predicate:
+        range: ExposureEventHasExposureMediumMediumPredicate
+        annotations:
+          prompt.examples: ''
+
+  ExposureEventHasExposureMediumMediumPredicate:
+    is_a: RelationshipType
+    attributes:
+      label:
+        description: >-
+          The predicate for the ExposureEventHasExposureMediumMedium
+          relationships.
+      id:
+        pattern: 'Has Exposure Medium'
+    id_prefixes: []
+    annotations: {}
+
+  ExposureEventHasExposureRouteRouteRelationship:
+    is_a: Triple
+    description: >-
+      A triple where the subject is a Exposure Event and where the object is a
+      Route.
+    slot_usage:
+      subject:
+        range: ExposureEvent
+        annotations:
+          prompt.examples: ''
+        minimum_cardinality: 0
+        maximum_cardinality: 1
+      object:
+        range: Route
+        annotations:
+          prompt.examples: ''
+        minimum_cardinality: 0
+      predicate:
+        range: ExposureEventHasExposureRouteRoutePredicate
+        annotations:
+          prompt.examples: ''
+
+  ExposureEventHasExposureRouteRoutePredicate:
+    is_a: RelationshipType
+    attributes:
+      label:
+        description: >-
+          The predicate for the ExposureEventHasExposureRouteRoute
+          relationships.
+      id:
+        pattern: 'Has Exposure Route'
+    id_prefixes: []
+    annotations: {}
+
+  LocationIsPotentialSourceOfStimulusRelationship:
+    is_a: Triple
+    description: >-
+      A triple where the subject is a Location and where the object is a
+      Stimulus.
+    slot_usage:
+      subject:
+        range: Location
+        annotations:
+          prompt.examples: ''
+        minimum_cardinality: 0
+        maximum_cardinality: 1
+      object:
+        range: Stimulus
+        annotations:
+          prompt.examples: ''
+        minimum_cardinality: 0
+      predicate:
+        range: LocationIsPotentialSourceOfStimulusPredicate
+        annotations:
+          prompt.examples: ''
+      amount:
+        description: ''
+        required: false
+        identifier: false
+        range: float
+      unit:
+        description: ''
+        required: false
+        identifier: false
+
+  LocationIsPotentialSourceOfStimulusPredicate:
+    is_a: RelationshipType
+    attributes:
+      label:
+        description: >-
+          The predicate for the LocationIsPotentialSourceOfStimulus
+          relationships.
+      id:
+        pattern: 'Is Potential Source Of'
+    id_prefixes: []
+    annotations: {}
+
+  LocationIsCloseToExposureEventRelationship:
+    is_a: Triple
+    description: >-
+      A triple where the subject is a Location and where the object is a
+      Exposure Event.
+    slot_usage:
+      subject:
+        range: Location
+        annotations:
+          prompt.examples: ''
+        minimum_cardinality: 0
+        maximum_cardinality: 1
+      object:
+        range: ExposureEvent
+        annotations:
+          prompt.examples: ''
+        minimum_cardinality: 0
+        maximum_cardinality: 1
+      predicate:
+        range: LocationIsCloseToExposureEventPredicate
+        annotations:
+          prompt.examples: ''
+      distance:
+        description: ''
+        required: false
+        identifier: false
+
+  LocationIsCloseToExposureEventPredicate:
+    is_a: RelationshipType
+    attributes:
+      label:
+        description: The predicate for the LocationIsCloseToExposureEvent relationships.
+      id:
+        pattern: 'Is Close To'
+    id_prefixes: []
+    annotations: {}
+
+  LocationIncludesDiagnosticValuesDiagnosisRelationship:
+    is_a: Triple
+    description: >-
+      A triple where the subject is a Location and where the object is a
+      Diagnosis.
+    slot_usage:
+      subject:
+        range: Location
+        annotations:
+          prompt.examples: ''
+        minimum_cardinality: 0
+        maximum_cardinality: 1
+      object:
+        range: Diagnosis
+        annotations:
+          prompt.examples: ''
+        minimum_cardinality: 0
+      predicate:
+        range: LocationIncludesDiagnosticValuesDiagnosisPredicate
+        annotations:
+          prompt.examples: ''
+
+  LocationIncludesDiagnosticValuesDiagnosisPredicate:
+    is_a: RelationshipType
+    attributes:
+      label:
+        description: >-
+          The predicate for the LocationIncludesDiagnosticValuesDiagnosis
+          relationships.
+      id:
+        pattern: 'Includes Diagnostic Values'
+    id_prefixes: []
+    annotations: {}
+
+  PersonDiagnosedWithDiagnosisRelationship:
+    is_a: Triple
+    description: >-
+      A triple where the subject is a Person and where the object is a
+      Diagnosis. not an event, happened any time
+    slot_usage:
+      subject:
+        range: Person
+        annotations:
+          prompt.examples: ''
+        minimum_cardinality: 0
+        maximum_cardinality: 1
+      object:
+        range: Diagnosis
+        annotations:
+          prompt.examples: ''
+        minimum_cardinality: 0
+      predicate:
+        range: PersonDiagnosedWithDiagnosisPredicate
+        annotations:
+          prompt.examples: ''
+
+  PersonDiagnosedWithDiagnosisPredicate:
+    is_a: RelationshipType
+    attributes:
+      label:
+        description: The predicate for the PersonDiagnosedWithDiagnosis relationships.
+      id:
+        pattern: 'Diagnosed With'
+    id_prefixes: []
+    annotations: {}
+
+  PersonDiagnosisEventRelationship:
+    is_a: Triple
+    description: >-
+      A triple where the subject is a Person and where the object is a Diagnosis
+      Event.
+    slot_usage:
+      subject:
+        range: Person
+        annotations:
+          prompt.examples: ''
+        minimum_cardinality: 0
+        maximum_cardinality: 1
+      object:
+        range: DiagnosisEvent
+        annotations:
+          prompt.examples: ''
+        minimum_cardinality: 0
+      predicate:
+        range: PersonDiagnosisEventPredicate
+        annotations:
+          prompt.examples: ''
+
+  PersonDiagnosisEventPredicate:
+    is_a: RelationshipType
+    attributes:
+      label:
+        description: The predicate for the PersonDiagnosisEvent relationships.
+    id_prefixes: []
+    annotations: {}
+
+  DiagnosisEventDiagnosisOfDiagnosisRelationship:
+    is_a: Triple
+    description: >-
+      A triple where the subject is a Diagnosis Event and where the object is a
+      Diagnosis.
+    slot_usage:
+      subject:
+        range: DiagnosisEvent
+        annotations:
+          prompt.examples: ''
+        minimum_cardinality: 0
+        maximum_cardinality: 1
+      object:
+        range: Diagnosis
+        annotations:
+          prompt.examples: ''
+        minimum_cardinality: 0
+      predicate:
+        range: DiagnosisEventDiagnosisOfDiagnosisPredicate
+        annotations:
+          prompt.examples: ''
+
+  DiagnosisEventDiagnosisOfDiagnosisPredicate:
+    is_a: RelationshipType
+    attributes:
+      label:
+        description: >-
+          The predicate for the DiagnosisEventDiagnosisOfDiagnosis
+          relationships.
+      id:
+        pattern: 'Diagnosis Of'
+    id_prefixes: []
+    annotations: {}
+
+  ExposureEventRelatedToSpillEventRelationship:
+    is_a: Triple
+    description: >-
+      A triple where the subject is a Exposure Event and where the object is a
+      Spill Event.
+    slot_usage:
+      subject:
+        range: ExposureEvent
+        annotations:
+          prompt.examples: ''
+        minimum_cardinality: 0
+        maximum_cardinality: 1
+      object:
+        range: SpillEvent
+        annotations:
+          prompt.examples: ''
+        minimum_cardinality: 0
+      predicate:
+        range: ExposureEventRelatedToSpillEventPredicate
+        annotations:
+          prompt.examples: ''
+
+  ExposureEventRelatedToSpillEventPredicate:
+    is_a: RelationshipType
+    attributes:
+      label:
+        description: The predicate for the ExposureEventRelatedToSpillEvent relationships.
+      id:
+        pattern: 'Related To'
+    id_prefixes: []
+    annotations: {}
+
+  LocationHasLocationSpillEventRelationship:
+    is_a: Triple
+    description: >-
+      A triple where the subject is a Location and where the object is a Spill
+      Event.
+    slot_usage:
+      subject:
+        range: Location
+        annotations:
+          prompt.examples: ''
+        minimum_cardinality: 0
+      object:
+        range: SpillEvent
+        annotations:
+          prompt.examples: ''
+        minimum_cardinality: 0
+        maximum_cardinality: 1
+      predicate:
+        range: LocationHasLocationSpillEventPredicate
+        annotations:
+          prompt.examples: ''
+
+  LocationHasLocationSpillEventPredicate:
+    is_a: RelationshipType
+    attributes:
+      label:
+        description: The predicate for the LocationHasLocationSpillEvent relationships.
+      id:
+        pattern: 'Has Location'
+    id_prefixes: []
+    annotations: {}
 
   Person:
-    is_a: NamedThing
-    description: >-
-      Represents a Person
-    slots:
-      - primary_email
-      - birth_date
-      - age_in_years
-      - vital_status
-    slot_usage:
-      primary_email:
-        pattern: "^\\S+@[\\S+\\.]+\\S+"
-
-  PersonCollection:
-    tree_root: true
-    description: >-
-      A holder for Person objects
+    is_a: NamedEntity
+    description: ''
+    mixins: []
     attributes:
-      entries:
-        range: Person
-        multivalued: true
-        inlined_as_list: true
+      person_id:
+        identifier: true
+        description: A unique identifier for the Person class.
+    id_prefixes: []
+    annotations: {}
 
-slots:
-  id:
-    identifier: true
-    slot_uri: schema:identifier
-    range: uriorcurie
-    description: A unique identifier for a thing
-  name:
-    slot_uri: schema:name
-    description: A human-readable name for a thing
-  description:
-    slot_uri: schema:description
-    description: A human-readable description for a thing
-  primary_email:
-    slot_uri: schema:email
-    description: The main email address of a person
-  birth_date:
-    slot_uri: schema:birthDate
-    range: date
-    description: Date on which a person is born
-  age_in_years:
-    range: integer
-    description: Number of years since birth
-  vital_status:
-    range: PersonStatus
-    description: living or dead status
+  Location:
+    is_a: NamedEntity
+    description: ''
+    mixins: []
+    attributes:
+      geolocation:
+        description: Latitude, longitude
+        required: true
+        identifier: false
+        range: string
+      has_diagnostic_frequency:
+        description: ''
+        required: false
+        identifier: false
+      location_id:
+        identifier: true
+        description: A unique identifier for the Location class.
+    id_prefixes: []
+    annotations: {}
 
-enums:
-  PersonStatus:
-    permissible_values:
-      ALIVE:
-        description: the person is living
-        meaning: PATO:0001421
-      DEAD:
-        description: the person is deceased
-        meaning: PATO:0001422
-      UNKNOWN:
-        description: the vital status is not known
-        todos:
-          - map this to an ontology
+  ExposureEvent:
+    is_a: NamedEntity
+    description: ''
+    mixins: []
+    attributes:
+      event_begin_time:
+        description: ''
+        required: false
+        identifier: false
+      event_end_time:
+        description: ''
+        required: false
+        identifier: false
+      exposure_event_id:
+        identifier: true
+        description: A unique identifier for the ExposureEvent class.
+    id_prefixes:
+      - ECTO
+    annotations:
+      annotators: sqlite:obo:ecto
+
+  Stimulus:
+    is_a: Chebi
+    description: ''
+    mixins: []
+    attributes:
+      stimulus_id:
+        identifier: true
+        description: A unique identifier for the Stimulus class.
+    id_prefixes:
+      - CHEBI
+    annotations:
+      annotators: sqlite:obo:chebi
+
+  Medium:
+    is_a: Envo
+    description: ''
+    mixins: []
+    attributes:
+      medium_id:
+        identifier: true
+        description: A unique identifier for the Medium class.
+    id_prefixes:
+      - ENVO
+    annotations:
+      annotators: sqlite:obo:envo
+
+  Route:
+    is_a: NamedEntity
+    description: ''
+    mixins: []
+    attributes:
+      route_id:
+        identifier: true
+        description: A unique identifier for the Route class.
+    id_prefixes:
+      - SNOMED
+    annotations:
+      annotators: sqlite:obo:snomed
+
+  Chebi:
+    is_a: NamedEntity
+    description: ''
+    mixins: []
+    attributes:
+      chebi_id:
+        identifier: true
+        description: A unique identifier for the Chebi class.
+    id_prefixes: []
+    annotations: {}
+
+  Envo:
+    is_a: NamedEntity
+    description: ''
+    mixins: []
+    attributes:
+      envo_id:
+        identifier: true
+        description: A unique identifier for the Envo class.
+    id_prefixes: []
+    annotations: {}
+
+  Diagnosis:
+    is_a: Mondo
+    description: ''
+    mixins: []
+    attributes:
+      diagnosis_id:
+        identifier: true
+        description: A unique identifier for the Diagnosis class.
+    id_prefixes:
+      - MONDO
+      - HP
+      - SNOMED
+    annotations:
+      annotators: sqlite:obo:mondo, sqlite:obo:hp, sqlite:obo:snomed
+
+  Mondo:
+    is_a: NamedEntity
+    description: ''
+    mixins: []
+    attributes:
+      mondo_id:
+        identifier: true
+        description: A unique identifier for the Mondo class.
+    id_prefixes: []
+    annotations: {}
+
+  DiagnosisEvent:
+    is_a: NamedEntity
+    description: ''
+    mixins: []
+    attributes:
+      event_begin_time:
+        description: ''
+        required: false
+        identifier: false
+      event_end_time:
+        description: ''
+        required: false
+        identifier: false
+      diagnosis_event_id:
+        identifier: true
+        description: A unique identifier for the DiagnosisEvent class.
+    id_prefixes: []
+    annotations: {}
+
+  SpillEvent:
+    is_a: NamedEntity
+    description: May need to connect Stimulus, Medium, Route here
+    mixins: []
+    attributes:
+      spill_event_id:
+        identifier: true
+        description: A unique identifier for the SpillEvent class.
+    id_prefixes: []
+    annotations: {}
